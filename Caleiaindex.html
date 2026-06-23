@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caleia | Reventa de Maquillaje</title>
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=300;400;600&family=Playfair+Display:ital,wght=0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS GENERALES Y TEMÁTICA ROSA/FEMENINA --- */
+        :root {
+            --rosa-principal: #fcd7d9;
+            --rosa-oscuro: #e8a7a1;
+            --dorado: #d4af37;
+            --texto-oscuro: #4a3b32;
+            --blanco: #ffffff;
+            --fondo-ligero: #fffaf0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--fondo-ligero);
+            color: var(--texto-oscuro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+
+        /* --- ENCABEZADO Y LOGO DE SEPHORA --- */
+        header {
+            background-color: var(--blanco);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
+        }
+
+        .sephora-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #000;
+            display: inline-block;
+            padding-bottom: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .brand-subtitle {
+            font-size: 14px;
+            color: var(--rosa-oscuro);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* --- MENÚ DE NAVEGACIÓN --- */
+        nav {
+            background-color: var(--rosa-principal);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--texto-oscuro);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--blanco);
+            color: var(--rosa-oscuro);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PÁGINA 1: DESCUENTOS --- */
+        .discount-badge {
+            background-color: var(--rosa-oscuro);
+            color: var(--blanco);
+            padding: 15px 30px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- PÁGINA 2: TABLA DE PRODUCTOS --- */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--blanco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #f0e6e6;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--rosa-principal);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: #fff5f5;
+        }
+
+        .product-link {
+            color: var(--rosa-oscuro);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .product-link:hover {
+            text-decoration: underline;
+            color: var(--texto-oscuro);
+        }
+
+        /* --- PÁGINA 3: CUADROS DE MÁS VENDIDOS --- */
+        .top-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .top-card {
+            background-color: var(--blanco);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(232, 167, 161, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .top-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .top-number {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--rosa-oscuro);
+            opacity: 0.7;
+        }
+
+        .top-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .top-card h3 {
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 5px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-style: italic;
+            color: #887770;
+            margin-bottom: 15px;
+        }
+
+        .top-card .btn-sephora {
+            background-color: var(--rosa-principal);
+            color: var(--texto-oscuro);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 25px;
+            width: 80%;
+            transition: background-color 0.3s;
+        }
+
+        .top-card .btn-sephora:hover {
+            background-color: var(--rosa-oscuro);
+            color: var(--blanco);
+        }
+
+        /* --- PÁGINA 4: REPRODUCTOR DE SECUENCIA INTERACTIVO --- */
+        .video-wrapper {
+            max-width: 800px;
+            height: 450px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            position: relative;
+            background-color: #000;
+        }
+
+        .video-canvas-simulation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.1s linear, filter 0.5s ease;
+        }
+
+        .moving {
+            animation: zoomPanVideo 12s infinite alternate ease-in-out;
+        }
+
+        .video-cinema-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(251,215,217,0.1) 0%, rgba(74,59,50,0.4) 100%);
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+
+        .video-ui-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            font-size: 13px;
+            z-index: 10;
+        }
+
+        .btn-play-pause {
+            background-color: var(--rosa-oscuro);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-play-pause:hover {
+            background-color: #d1928c;
+            transform: scale(1.05);
+        }
+
+        .timeline-bar {
+            flex: 1;
+            height: 5px;
+            background-color: rgba(255,255,255,0.25);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background-color: var(--rosa-principal);
+            border-radius: 3px;
+        }
+
+        .progress-running {
+            animation: moveProgress 15s infinite linear;
+        }
+
+        @keyframes zoomPanVideo {
+            0% { transform: scale(1.0) translate(0px, 0px) rotate(0deg); filter: brightness(1); }
+            25% { transform: scale(1.08) translate(-10px, 5px) rotate(0.5deg); }
+            50% { transform: scale(1.15) translate(10px, -10px) rotate(-0.5deg); filter: brightness(1.1); }
+            75% { transform: scale(1.08) translate(-5px, -5px) rotate(0.2deg); }
+            100% { transform: scale(1.0) translate(0px, 0px) rotate(0deg); filter: brightness(1); }
+        }
+
+        @keyframes moveProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* --- CONTADOR DE VISITAS --- */
+        .visit-counter {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #6e5e55;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .visit-counter span {
+            background-color: var(--rosa-principal);
+            color: var(--texto-oscuro);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-left: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            background-color: var(--blanco);
+            padding: 25px 20px;
+            margin-top: auto;
+            border-top: 1px solid var(--rosa-principal);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--rosa-oscuro);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: var(--texto-oscuro);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="sephora-logo">SEPHORA</div>
+            <div class="brand-subtitle">Distribuido por Caleia</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a class="nav-link active" onclick="showPage('p1')">Descuentos</a></li>
+            <li><a class="nav-link" onclick="showPage('p2')">Productos y Precios</a></li>
+            <li><a class="nav-link" onclick="showPage('p3')">Más Vendidos</a></li>
+            <li><a class="nav-link" onclick="showPage('p4')">Comercial de Prueba</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- PÁGINA 1: DESCUENTOS -->
+        <section id="p1" class="page active">
+            <h2>Ofertas Exclusivas en Caleia</h2>
+            <p>Disfruta de la mejor selección de maquillaje importado con precios especiales por tiempo limitado.</p>
+            <div class="discount-badge">¡20% OFF en toda la línea de labiales!</div>
+            <p style="margin-top: 15px; font-style: italic;">Usa el código: <strong>CALEIA20</strong> al finalizar tu pedido de reventa.</p>
+        </section>
+
+        <!-- PÁGINA 2: TABLA DE PRECIOS -->
+        <section id="p2" class="page">
+            <h2>Catálogo Ampliado de Reventa</h2>
+            <p>Lista detallada de productos disponibles. Haz clic en el nombre de cada uno para ver su ficha oficial en Sephora.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto (Link Oficial)</th>
+                            <th>Marca Original</th>
+                            <th>Precio de Lista</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/rare-beauty-by-selena-gomez-liquid-touch-weightless-foundation-P461916" target="_blank" rel="noopener noreferrer">Base Liquid Touch</a></td>
+                            <td>Rare Beauty</td>
+                            <td>$34.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/shape-tape-concealer-P500753" target="_blank" rel="noopener noreferrer">Corrector Shape Tape</a></td>
+                            <td>Tarte</td>
+                            <td>$31.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/soft-pinch-liquid-blush-P458142" target="_blank" rel="noopener noreferrer">Rubor Líquido Soft Pinch</a></td>
+                            <td>Rare Beauty</td>
+                            <td>$23.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/modern-renaissance-eye-shadow-palette-P409118" target="_blank" rel="noopener noreferrer">Paleta de Sombras Neutras</a></td>
+                            <td>Anastasia Beverly Hills</td>
+                            <td>$45.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/easy-bake-loose-baking-setting-powder-P433402" target="_blank" rel="noopener noreferrer">Polvo Translúcido Easy Bake</a></td>
+                            <td>Huda Beauty</td>
+                            <td>$38.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/all-nighter-long-lasting-makeup-setting-spray-P42330" target="_blank" rel="noopener noreferrer">Fijador All Nighter</a></td>
+                            <td>Urban Decay</td>
+                            <td>$36.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/gloss-bomb-universal-lip-luminizer-P67988453" target="_blank" rel="noopener noreferrer">Gloss Bomb Universal</a></td>
+                            <td>Fenty Beauty</td>
+                            <td>$21.00</td>
+                        </tr>
+                        <tr>
+                            <td><a class="product-link" href="https://www.sephora.com/product/P504432" target="_blank" rel="noopener noreferrer">Máscara de Pestañas Tower 28</a></td>
+                            <td>Tower 28 Beauty</td>
+                            <td>$20.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PÁGINA 3: MÁS VENDIDOS -->
+        <section id="p3" class="page">
+            <h2>Top de los Más Vendidos</h2>
+            <p>Descubre los 6 productos estrella favoritos de la temporada con acceso directo a sus especificaciones.</p>
+            
+            <div class="top-grid">
+                <!-- Producto 1 -->
+                <div class="top-card">
+                    <span class="top-number">#1</span>
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80" alt="Watermelon Glow Drops">
+                    <h3>Watermelon Glow Niacinamide Dew Drops</h3>
+                    <p class="top-brand">Glow Recipe</p>
+                    <a href="https://www.sephora.com/product/glow-recipe-watermelon-glow-niacinamide-dew-drops-P466163" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="top-card">
+                    <span class="top-number">#2</span>
+                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=400&q=80" alt="Gloss Bomb Fenty">
+                    <h3>Gloss Bomb Universal Lip Luminizer</h3>
+                    <p class="top-brand">Fenty Beauty</p>
+                    <a href="https://www.sephora.com/product/gloss-bomb-universal-lip-luminizer-P67988453" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="top-card">
+                    <span class="top-number">#3</span>
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=400&q=80" alt="Flawless Filter Base">
+                    <h3>Hollywood Flawless Filter</h3>
+                    <p class="top-brand">Charlotte Tilbury</p>
+                    <a href="https://www.sephora.com/product/hollywood-flawless-filter-P434104" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+
+                <!-- Producto 4 (CORREGIDO CON NUEVA IMAGEN DIRECTA) -->
+                <div class="top-card">
+                    <span class="top-number">#4</span>
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80" alt="Rare Beauty Blush">
+                    <h3>Soft Pinch Liquid Blush</h3>
+                    <p class="top-brand">Rare Beauty</p>
+                    <a href="https://www.sephora.com/product/soft-pinch-liquid-blush-P458142" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="top-card">
+                    <span class="top-number">#5</span>
+                    <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=400&q=80" alt="Bum Bum Cream">
+                    <h3>Brazilian Bum Bum Cream</h3>
+                    <p class="top-brand">Sol de Janeiro</p>
+                    <a href="https://www.sephora.com/product/brazilian-bum-bum-cream-P411877" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="top-card">
+                    <span class="top-number">#6</span>
+                    <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?auto=format&fit=crop&w=400&q=80" alt="Easy Bake Powder">
+                    <h3>Easy Bake Loose Powder</h3>
+                    <p class="top-brand">Huda Beauty</p>
+                    <a href="https://www.sephora.com/product/easy-bake-loose-baking-setting-powder-P433402" target="_blank" rel="noopener noreferrer" class="btn-sephora">Ver en Sephora</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 4: REPRODUCTOR TOTALMENTE INTERACTIVO -->
+        <section id="p4" class="page">
+            <h2>Comercial de Tendencias</h2>
+            <p>Usa los controles del reproductor integrado para congelar o reproducir el análisis de texturas en tiempo real.</p>
+            
+            <div class="video-wrapper">
+                <div id="video-simulado" class="video-canvas-simulation moving"></div>
+                <div class="video-cinema-layer"></div>
+                
+                <div class="video-ui-controls">
+                    <button class="btn-play-pause" id="play-pause-btn" onclick="toggleVideoPlayback()">Pausar</button>
+                    <div id="status-text">REPRODUCIENDO</div>
+                    <div class="timeline-bar">
+                        <div id="progress-bar" class="timeline-progress progress-running"></div>
+                    </div>
+                    <div>0:18 / 1:00</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="visit-counter">
+            Visitas a la página:<span id="contador-texto">0</span>
+        </div>
+        <p>&copy; 2026 Caleia - Todos los derechos reservados.</p>
+        <p>¿Quieres saber más? Lee una <a href="https://www.trendencias.com" target="_blank" rel="noopener noreferrer">reseña honesta sobre los productos de Sephora aquí</a>.</p>
+    </footer>
+
+    <script>
+        // --- 1. LÓGICA DE NAVEGACIÓN ---
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(pageId).classList.add('active');
+
+            const clickedLink = Array.from(links).find(link => link.getAttribute('onclick').includes(pageId));
+            if (clickedLink) {
+                clickedLink.classList.add('active');
+            }
+        }
+
+        // --- 2. INTERACTIVIDAD DEL REPRODUCTOR (PLAY / PAUSE LOCAL) ---
+        let isPlaying = true;
+
+        function toggleVideoPlayback() {
+            const videoElement = document.getElementById('video-simulado');
+            const progressBar = document.getElementById('progress-bar');
+            const btn = document.getElementById('play-pause-btn');
+            const statusText = document.getElementById('status-text');
+
+            if (isPlaying) {
+                videoElement.classList.remove('moving');
+                progressBar.classList.remove('progress-running');
+                
+                const computedTransform = window.getComputedStyle(videoElement).transform;
+                videoElement.style.transform = computedTransform;
+                
+                btn.innerText = "Reproducir";
+                statusText.innerText = "PAUSADO";
+                isPlaying = false;
+            } else {
+                videoElement.style.transform = "none"; 
+                videoElement.classList.add('moving');
+                progressBar.classList.add('progress-running');
+                
+                btn.innerText = "Pausar";
+                statusText.innerText = "REPRODUCIENDO";
+                isPlaying = true;
+            }
+        }
+
+        // --- 3. LÓGICA DEL CONTADOR DE VISITAS ---
+        window.onload = function() {
+            let visitas = localStorage.getItem('contador_caleia');
+            if (visitas === null) {
+                visitas = 1;
+            } else {
+                visitas = parseInt(visitas) + 1;
+            }
+            localStorage.setItem('contador_caleia', visitas);
+            document.getElementById('contador-texto').innerText = visitas;
+        }
+    </script>
+</body>
+</html>
